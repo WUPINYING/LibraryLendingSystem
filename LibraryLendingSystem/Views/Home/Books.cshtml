@@ -1,0 +1,22 @@
+﻿<button class="btn btn-primary" onclick="getTest()">getTest</button>
+
+@section Scripts
+    {
+    <script>
+        var baseAddress = "https://localhost:7206";
+
+        function getTest() {
+            //alert("hi");
+
+            $.ajax({
+                type: "GET",
+                url: `${baseAddress}/api/Books`
+            }).done(data => {
+                alert(JSON.stringify(data));
+            }).fail(err => {
+                alert(err.statusText);
+            });
+        }
+    </script>
+
+}
