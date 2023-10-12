@@ -1,18 +1,24 @@
+using LibraryLendingSystem_Service.Books.Interface;
+using LibraryLendingSystem_Service.Books.Repository;
 using LibraryLendingSystem_Service.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 // Add services to the DI container.
-string LibraryLendingSystemConnectionString = builder.Configuration.GetConnectionString("LibraryLendingSystem");
+//string LibraryLendingSystemConnectionString = builder.Configuration.GetConnectionString("LibraryLendingSystem");
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//{
+//    options.UseSqlServer(LibraryLendingSystemConnectionString);
+//});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(LibraryLendingSystemConnectionString);
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext"));
 });
-
-
-builder.Services.AddControllers();
 
 //CORS
 string myAllowOrigins = "AllowAny";
@@ -23,6 +29,8 @@ builder.Services.AddCors(options =>
         );
 });
 
+//Dapper
+builder.Services.AddScoped<IDapperRepo, DapperRepo>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

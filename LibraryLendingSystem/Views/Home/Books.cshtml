@@ -1,22 +1,52 @@
-﻿<button class="btn btn-primary" onclick="getTest()">getTest</button>
+﻿
+<div>
+    <h2>Book List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Introduction</th>
+                <th>借閱狀態</th>
+            </tr>
+        </thead>
+        <tbody id="bookList">
+            <!-- 書籍將在這裡顯示 -->
+        </tbody>
+    </table>
+</div>
 
 @section Scripts
     {
     <script>
         var baseAddress = "https://localhost:7206";
 
-        function getTest() {
-            //alert("hi");
+        $(document).ready(function () {
+            getBooks();
+        });
 
+        function getBooks() {
             $.ajax({
                 type: "GET",
                 url: `${baseAddress}/api/Books`
             }).done(data => {
-                alert(JSON.stringify(data));
+                displayBooks(data);
             }).fail(err => {
                 alert(err.statusText);
             });
         }
-    </script>
 
+        function displayBooks(books) {
+            var bookList = $("#bookList");
+
+            // 清空先前的書籍
+            bookList.empty();
+
+            // 迭代書籍數據並附加到表格
+            $.each(books, function (index, book) {
+                bookList.append("<tr><td>" + book.isbn + "</td><td>" + book.name + "</td><td>" + book.author + "</td><td>" + book.introduction + "</td></tr>");
+            });
+        }
+    </script>
 }

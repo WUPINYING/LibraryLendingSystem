@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.23">
       <PrivateAssets>all</PrivateAssets>
@@ -19,11 +20,6 @@
   <ItemGroup>
     <Folder Include="Book\Models\Dtos\" />
     <Folder Include="Book\Models\Vms\" />
-    <Folder Include="User\Exts\" />
-    <Folder Include="User\Interface\" />
-    <Folder Include="User\Models\Dtos\" />
-    <Folder Include="User\Service\" />
-    <Folder Include="User\Repository\" />
   </ItemGroup>
 
 </Project>

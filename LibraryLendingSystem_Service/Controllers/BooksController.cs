@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryLendingSystem_Service.Models;
 using Microsoft.AspNetCore.Cors;
+using LibraryLendingSystem_Service.Books.Service;
+using LibraryLendingSystem_Service.Books.Interface;
+using LibraryLendingSystem_Service.Books.Exts;
 
 namespace LibraryLendingSystem_Service.Controllers
 {
@@ -15,33 +18,38 @@ namespace LibraryLendingSystem_Service.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _db;
+        private IDapperRepo _repo;
 
-        public BooksController(AppDbContext context)
+        public BooksController(AppDbContext db, IDapperRepo repo)
         {
-            _context = context;
+            _db = db;
+            _repo = repo;
         }
 
         // GET: api/Books
         [HttpGet]
-        public async Task<IEnumerable<Book>> GetBook()
+        public async Task<ActionResult<IEnumerable<Book>>> GetBook()
         {
-          if (_context.Book == null)
-          {
-              return null;
-          }
-            return await _context.Book.ToListAsync();
+            var service = new BookService(_repo);
+            var book = service.GetBooksList().Select(b=>b.ToBooVM());
+            return Ok(book);
+          //if (_context.Book == null)
+          //{
+          //    return null;
+          //}
+          //  return await _context.Book.ToListAsync();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<Book> GetBook(string id)
         {
-          if (_context.Book == null)
+          if (_db.Book == null)
           {
               return null;
           }
-            var book = await _context.Book.FindAsync(id);
+            var book = await _db.Book.FindAsync(id);
 
             if (book == null)
             {
@@ -61,11 +69,11 @@ namespace LibraryLendingSystem_Service.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(book).State = EntityState.Modified;
+            _db.Entry(book).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -87,14 +95,14 @@ namespace LibraryLendingSystem_Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
-          if (_context.Book == null)
+          if (_db.Book == null)
           {
               return Problem("Entity set 'AppDbContext.Book'  is null.");
           }
-            _context.Book.Add(book);
+            _db.Book.Add(book);
             try
             {
-                await _context.SaveChangesAsync();
+                await _db.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
@@ -115,25 +123,25 @@ namespace LibraryLendingSystem_Service.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(string id)
         {
-            if (_context.Book == null)
+            if (_db.Book == null)
             {
                 return NotFound();
             }
-            var book = await _context.Book.FindAsync(id);
+            var book = await _db.Book.FindAsync(id);
             if (book == null)
             {
                 return NotFound();
             }
 
-            _context.Book.Remove(book);
-            await _context.SaveChangesAsync();
+            _db.Book.Remove(book);
+            await _db.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool BookExists(string id)
         {
-            return (_context.Book?.Any(e => e.Isbn == id)).GetValueOrDefault();
+            return (_db.Book?.Any(e => e.Isbn == id)).GetValueOrDefault();
         }
     }
 }

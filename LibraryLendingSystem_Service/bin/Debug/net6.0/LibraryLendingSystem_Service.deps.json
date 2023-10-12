@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "LibraryLendingSystem_Service/1.0.0": {
         "dependencies": {
+          "Dapper": "2.1.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.23",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.23",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
@@ -15,6 +16,14 @@
         },
         "runtime": {
           "LibraryLendingSystem_Service.dll": {}
+        }
+      },
+      "Dapper/2.1.4": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.4.42149"
+          }
         }
       },
       "Humanizer/2.14.1": {
@@ -2525,6 +2534,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Dapper/2.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TnTa28ktP/drRXnnXChHANq2WoF8af9DLu3VBtyPn3RYjxwDzuYhGrSvAN2CrmE+RyNaN1v81kf6rYbp0a4UaQ==",
+      "path": "dapper/2.1.4",
+      "hashPath": "dapper.2.1.4.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",
