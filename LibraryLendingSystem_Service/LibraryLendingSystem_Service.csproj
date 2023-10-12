@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Book\Models\Dtos\" />
-    <Folder Include="Book\Models\Vms\" />
+    <Folder Include="Users\Models\Vms\" />
   </ItemGroup>
 
 </Project>

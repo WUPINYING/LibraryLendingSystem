@@ -1,7 +1,6 @@
 using LibraryLendingSystem_Service.Books.Interface;
 using LibraryLendingSystem_Service.Books.Repository;
 using LibraryLendingSystem_Service.Models;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,8 +24,7 @@ string myAllowOrigins = "AllowAny";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
-        name: myAllowOrigins, policy => policy.WithOrigins("*").WithHeaders("*").WithMethods("*")
-        );
+        name: myAllowOrigins, policy => policy.WithOrigins("*").WithHeaders("*").WithMethods("*"));
 });
 
 //Dapper

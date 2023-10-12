@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryLendingSystem_Service.Models;
 using Microsoft.AspNetCore.Cors;
@@ -35,11 +30,11 @@ namespace LibraryLendingSystem_Service.Controllers
             var service = new BookService(_repo);
             var book = service.GetBooksList().Select(b => b.ToBooVM());
             return Ok(book);
-            //if (_context.Book == null)
+            //if (_db.Book == null)
             //{
             //    return null;
             //}
-            //  return await _context.Book.ToListAsync();
+            //  return await _db.Book.ToListAsync();
         }
 
         // GET: api/Books/5

@@ -82,3 +82,6 @@ ON Inventory.Status_Id=LendStatus.StatusId;
 --INSERT
 INSERT INTO [BorrowingRecord] ([UserId], [InventoryId], [BorrowingTime], [ReturnTime])
 VALUES (8, 8, GETDATE(), DATEADD(MONTH, 1, GETDATE()));
+
+INSERT INTO [User]
+VALUES ('0912123123','password11','User11',GETDATE(),'2023-10-19 06:15:00');

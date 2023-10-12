@@ -27,11 +27,37 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">註冊</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" onclick="register()">註冊</button>
         </form>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        function register() {
+            alert("註冊");
+            const phone = document.getElementById("phone").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            const data = {
+                Input: {
+                    Phone: phone,
+                    Password: password,
+                    ConfirmPassword: confirmPassword
+                }
+            };
+
+            axios.post('/Register/Register', data)
+                .then(response => {
+                    // 處理成功回應，可以重定向到成功頁面或顯示註冊成功訊息
+                })
+                .catch(error => {
+                    // 處理錯誤回應，可以顯示錯誤訊息
+                });
+        }
+    </script>
 }
