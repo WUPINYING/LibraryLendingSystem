@@ -1,5 +1,4 @@
-﻿
-<div>
+﻿<div>
     <h2>Book List</h2>
     <table class="table">
         <thead>
@@ -9,6 +8,7 @@
                 <th>Author</th>
                 <th>Introduction</th>
                 <th>借閱狀態</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="bookList">
@@ -43,10 +43,56 @@
             // 清空先前的書籍
             bookList.empty();
 
-            // 迭代書籍數據並附加到表格
             $.each(books, function (index, book) {
-                bookList.append("<tr><td>" + book.isbn + "</td><td>" + book.name + "</td><td>" + book.author + "</td><td>" + book.introduction + "</td></tr>");
+                var borrowButtonText, borrowButtonClass, borrowButtonAction, statusCell;
+                var isBorrowButtonDisabled = false;
+
+                if (book.statusName === '出借中') {
+                    borrowButtonText = '已出借';
+                    borrowButtonClass = 'btn btn-secondary';
+                    statusCell = '<span class="text-danger">' + book.statusName + '</span>';
+                    isBorrowButtonDisabled = true; // 禁用 "已出借" 按鈕
+                } else if (book.statusName === '在庫') {
+                    borrowButtonText = '借閱';
+                    borrowButtonClass = 'btn btn-primary';
+                    borrowButtonAction = 'borrowBook(' + book.isbn + ')';
+                    statusCell = book.statusName;
+                } else {
+                    borrowButtonText = '無法借閱';
+                    borrowButtonClass = 'btn btn-danger';
+                    statusCell = book.statusName;
+                    isBorrowButtonDisabled = true; // 禁用 "無法借閱" 按鈕
+                }
+
+                var borrowButtonId = 'borrowButton_' + book.isbn; // 每個按鈕的唯一ID
+                var borrowButton = '<button id="' + borrowButtonId + '" class="' + borrowButtonClass + '" onclick="' + borrowButtonAction + '" ' + (isBorrowButtonDisabled ? 'disabled' : '') + '>' + borrowButtonText + '</button>';
+
+                bookList.append("<tr><td>" + book.isbn + "</td><td>" + book.name + "</td><td>" + book.author + "</td><td>" + book.introduction + "</td><td>" + statusCell + "</td><td>" + borrowButton + "</td></tr>");
             });
+        }
+
+        function borrowBook(isbn) {
+            alert("借閱 ISBN: " + isbn);
+
+            var userId = 1;
+            var inventoryId = 1;
+
+            $.ajax({
+                type: "POST",
+                url: `${baseAddress}/api/Books/BorrowBook`,
+                data: JSON.stringify({
+                    UserId: userId,
+                    InventoryId: inventoryId
+                }),
+                contentType: "application/json", // 設定內容類型
+                success: function (data) {
+                    displayBooks(data);
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+
         }
     </script>
 }

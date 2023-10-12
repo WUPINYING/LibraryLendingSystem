@@ -83,8 +83,8 @@ namespace LibraryLendingSystem.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "密碼必填")]
+            [StringLength(10, ErrorMessage = "{0} 長度最短 {2} 最長 {1} ", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -93,10 +93,17 @@ namespace LibraryLendingSystem.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "確認密碼必填")]
+            [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "密碼與確認密碼必須一致")]
             public string ConfirmPassword { get; set; }
+
+            [Required(ErrorMessage = "手機號碼必填")]
+            [StringLength(10)]
+            [Display(Name = "Phone")]
+            public string Phone { get; set; }
         }
 
 

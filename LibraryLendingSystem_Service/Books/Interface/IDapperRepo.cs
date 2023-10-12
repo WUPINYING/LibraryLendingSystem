@@ -5,5 +5,6 @@ namespace LibraryLendingSystem_Service.Books.Interface
     public interface IDapperRepo
     {
         IEnumerable<BookDto> GetBooksList();
+        BorrowBookDto BorrowBook(BorrowBookDto dto);
     }
 }

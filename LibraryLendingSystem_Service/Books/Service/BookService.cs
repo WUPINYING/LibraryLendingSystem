@@ -20,5 +20,11 @@ namespace LibraryLendingSystem_Service.Books.Service
             var result = _repo.GetBooksList();
             return result;
         }
+
+        public BorrowBookDto BorrowBook(BorrowBookDto dto)
+        {
+            var result =_repo.BorrowBook(dto);
+            return result;
+        }
     }
 }

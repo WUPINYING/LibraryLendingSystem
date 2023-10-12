@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Cors;
 using LibraryLendingSystem_Service.Books.Service;
 using LibraryLendingSystem_Service.Books.Interface;
 using LibraryLendingSystem_Service.Books.Exts;
+using LibraryLendingSystem_Service.Books.Models.Dtos;
 
 namespace LibraryLendingSystem_Service.Controllers
 {
@@ -32,23 +33,23 @@ namespace LibraryLendingSystem_Service.Controllers
         public async Task<ActionResult<IEnumerable<Book>>> GetBook()
         {
             var service = new BookService(_repo);
-            var book = service.GetBooksList().Select(b=>b.ToBooVM());
+            var book = service.GetBooksList().Select(b => b.ToBooVM());
             return Ok(book);
-          //if (_context.Book == null)
-          //{
-          //    return null;
-          //}
-          //  return await _context.Book.ToListAsync();
+            //if (_context.Book == null)
+            //{
+            //    return null;
+            //}
+            //  return await _context.Book.ToListAsync();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
         public async Task<Book> GetBook(string id)
         {
-          if (_db.Book == null)
-          {
-              return null;
-          }
+            if (_db.Book == null)
+            {
+                return null;
+            }
             var book = await _db.Book.FindAsync(id);
 
             if (book == null)
@@ -95,10 +96,10 @@ namespace LibraryLendingSystem_Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
-          if (_db.Book == null)
-          {
-              return Problem("Entity set 'AppDbContext.Book'  is null.");
-          }
+            if (_db.Book == null)
+            {
+                return Problem("Entity set 'AppDbContext.Book'  is null.");
+            }
             _db.Book.Add(book);
             try
             {
@@ -117,6 +118,20 @@ namespace LibraryLendingSystem_Service.Controllers
             }
 
             return CreatedAtAction("GetBook", new { id = book.Isbn }, book);
+        }
+
+
+        [HttpPost("BorrowBook")]
+        public async Task<ActionResult<BorrowBookDto>> BorrowBook(BorrowBookDto dto)
+        {
+            //是否登入
+            //如果無法取得使用者資訊
+            //就請登入
+            //不然就存使用者資訊
+            //丟給service
+            var service = new BookService(_repo);
+            var result = service.BorrowBook(dto);
+            return Ok(result);
         }
 
         // DELETE: api/Books/5

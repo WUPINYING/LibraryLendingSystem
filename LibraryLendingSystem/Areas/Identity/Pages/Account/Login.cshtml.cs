@@ -72,8 +72,10 @@ namespace LibraryLendingSystem.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "密碼必填")]
+            [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             /// <summary>
@@ -82,6 +84,11 @@ namespace LibraryLendingSystem.Areas.Identity.Pages.Account
             /// </summary>
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+
+            [Required(ErrorMessage = "手機號碼必填")]
+            [StringLength(10)]
+            [Display(Name = "Phone")]
+            public string Phone { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
