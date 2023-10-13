@@ -11,6 +11,5 @@ namespace LibraryLendingSystem_Service.Models
         public int InventoryId { get; set; }
         public DateTime BorrowingTime { get; set; }
         public DateTime ReturnTime { get; set; }
-        public int Id { get; set; }
     }
 }

@@ -1,19 +1,20 @@
 ﻿using LibraryLendingSystem_Service.Models;
-using LibraryLendingSystem_Service.Users.Interface;
-using LibraryLendingSystem_Service.Users.Models.Dtos;
+using LibraryLendingSystem_Service.Members.Interface;
+using LibraryLendingSystem_Service.Members.Models.Dtos;
 
-namespace LibraryLendingSystem_Service.Users.Service
+namespace LibraryLendingSystem_Service.Members.Service
 {
-    public class UserService
+    public class MemberService
     {
-        private IUserDapperRepo _repo;
+        private IMemberDapperRepo _repo;
         private AppDbContext _db;
 
-        public UserService(IUserDapperRepo repo)
+        public MemberService(IMemberDapperRepo repo)
         {
             _repo = repo;
             _db = new AppDbContext();
         }
+
         public RegisterDto Register(RegisterDto dto)
         {
             var result = _repo.Register(dto);

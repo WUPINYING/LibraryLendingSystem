@@ -32,7 +32,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[User]",
+         "Name": "[dbo].[Users]",
          "ObjectType": 0
       }
    ],

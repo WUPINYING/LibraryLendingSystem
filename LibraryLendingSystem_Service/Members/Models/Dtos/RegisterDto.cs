@@ -1,4 +1,4 @@
-﻿namespace LibraryLendingSystem_Service.Users.Models.Dtos
+﻿namespace LibraryLendingSystem_Service.Members.Models.Dtos
 {
     public class RegisterDto
     {

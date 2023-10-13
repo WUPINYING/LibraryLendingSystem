@@ -34,30 +34,35 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        var baseAddress = "https://localhost:7206";
+
+        $("#registerForm").submit(function (e) {
+            e.preventDefault();
+            register();
+        });
 
         function register() {
-            alert("註冊");
-            const phone = document.getElementById("phone").value;
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
+            // 取得表單輸入值
+            //alert("註冊");
+            const phoneNumber = $("#Input_Phone").val();
+            const password = $("#Input_Password").val();
 
-            const data = {
-                Input: {
-                    Phone: phone,
-                    Password: password,
-                    ConfirmPassword: confirmPassword
+            $.ajax({
+                type: "POST",
+                url: `${baseAddress}/api/Members/Register`,
+                data: JSON.stringify({
+                    PhoneNumber: phoneNumber,
+                    Password: password
+                }),
+                contentType: "application/json", // 設定內容類型為 JSON
+                success: function (data) {
+                    console.log("Success: ", data);
+                },
+                error: function (error) {
+                    console.log("Error: ", err.responseText);
                 }
-            };
-
-            axios.post('/Register/Register', data)
-                .then(response => {
-                    // 處理成功回應，可以重定向到成功頁面或顯示註冊成功訊息
-                })
-                .catch(error => {
-                    // 處理錯誤回應，可以顯示錯誤訊息
-                });
+            });
         }
     </script>
 }

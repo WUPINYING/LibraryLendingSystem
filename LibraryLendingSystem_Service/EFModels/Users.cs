@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LibraryLendingSystem_Service.Models
 {
-    public partial class User
+    public partial class Users
     {
         public int UserId { get; set; }
         public string PhoneNumber { get; set; }

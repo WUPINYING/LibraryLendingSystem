@@ -22,7 +22,7 @@ namespace LibraryLendingSystem_Service.Models
         public virtual DbSet<BorrowingRecord> BorrowingRecord { get; set; }
         public virtual DbSet<Inventory> Inventory { get; set; }
         public virtual DbSet<LendStatus> LendStatus { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,7 +45,7 @@ namespace LibraryLendingSystem_Service.Models
 
                 entity.Property(e => e.Author)
                     .IsRequired()
-                    .HasMaxLength(15);
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.Introduction)
                     .IsRequired()
@@ -58,6 +58,8 @@ namespace LibraryLendingSystem_Service.Models
 
             modelBuilder.Entity<BorrowingRecord>(entity =>
             {
+                entity.HasNoKey();
+
                 entity.HasIndex(e => e.InventoryId, "IX_BorrowingRecord_InventoryId");
 
                 entity.HasIndex(e => e.UserId, "IX_BorrowingRecord_UserId");
@@ -89,8 +91,11 @@ namespace LibraryLendingSystem_Service.Models
                     .HasMaxLength(10);
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<Users>(entity =>
             {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK_User");
+
                 entity.HasIndex(e => e.PhoneNumber, "IX_User_phone")
                     .IsUnique();
 
