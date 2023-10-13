@@ -41,12 +41,17 @@
             e.preventDefault();
             register();
         });
-
+       
         function register() {
             // 取得表單輸入值
             //alert("註冊");
             const phoneNumber = $("#Input_Phone").val();
             const password = $("#Input_Password").val();
+
+            if (!phoneNumber || !password || !confirmPassword) {
+                alert("欄位請確實填寫");
+                return;
+            }
 
             $.ajax({
                 type: "POST",

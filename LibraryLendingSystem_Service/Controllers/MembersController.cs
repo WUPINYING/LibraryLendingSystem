@@ -153,8 +153,7 @@ namespace LibraryLendingSystem_Service.Controllers
                     };
 
                     // 控制登入狀態
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                     service.Login(dto);
                     return Ok("會員登入成功");

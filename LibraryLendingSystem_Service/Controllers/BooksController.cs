@@ -6,6 +6,7 @@ using LibraryLendingSystem_Service.Books.Service;
 using LibraryLendingSystem_Service.Books.Interface;
 using LibraryLendingSystem_Service.Books.Exts;
 using LibraryLendingSystem_Service.Books.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryLendingSystem_Service.Controllers
 {
@@ -117,16 +118,13 @@ namespace LibraryLendingSystem_Service.Controllers
 
 
         [HttpPost("BorrowBook")]
+        [Authorize]
         public async Task<ActionResult<BorrowBookDto>> BorrowBook(BorrowBookDto dto)
         {
-            //是否登入
-            //如果無法取得使用者資訊
-            //就請登入
-            //不然就存使用者資訊
-            //丟給service
             var service = new BookService(_repo);
             var result = service.BorrowBook(dto);
             return Ok(result);
+
         }
 
         // DELETE: api/Books/5

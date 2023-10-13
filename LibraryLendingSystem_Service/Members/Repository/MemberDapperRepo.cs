@@ -29,7 +29,11 @@ VALUES (@phoneNumber,@password,'User11',GETDATE(),'2023-10-19 06:15:00');";
 
         public void Login(RegisterDto dto)
         {
-            //to更新最後登入時間欄位
+            string sql = @"UPDATE [Users]
+SET LastLoginTime = GETDATE()
+WHERE PhoneNumber = @phoneNumber;";
+            using IDbConnection dbConnection = new SqlConnection(_connStr);
+            dbConnection.Query<RegisterDto>(sql, new { phoneNumber = dto.PhoneNumber});
         }
     }
 }

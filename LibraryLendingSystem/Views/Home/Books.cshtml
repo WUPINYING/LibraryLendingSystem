@@ -3,12 +3,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ISBN</th>
-                <th>Name</th>
-                <th>Author</th>
-                <th>Introduction</th>
-                <th>借閱狀態</th>
-                <th>Action</th>
+                <th>國際標準書號</th>
+                <th>書名</th>
+                <th>作者</th>
+                <th>描述</th>
+                <th>目前狀態</th>
             </tr>
         </thead>
         <tbody id="bookList">
@@ -87,9 +86,10 @@
                 contentType: "application/json", // 設定內容類型
                 success: function (data) {
                     displayBooks(data);
+                    alert("借閱成功!");
                 },
                 error: function (err) {
-                    alert(err.statusText);
+                    alert("請先登入才能借書!");
                 }
             });
 
