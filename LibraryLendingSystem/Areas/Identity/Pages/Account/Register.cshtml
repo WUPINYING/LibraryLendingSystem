@@ -58,11 +58,13 @@
                 contentType: "application/json", // 設定內容類型為 JSON
                 success: function (data) {
                     console.log("Success: ", data);
+                    alert("註冊成功囉!請前往登入!");
+                    window.location.href = "https://localhost:7177/Identity/Account/Login";
                 },
                 error: function (error) {
                     console.log("Error: ", err.responseText);
                 }
-            });
+            });            
         }
     </script>
 }

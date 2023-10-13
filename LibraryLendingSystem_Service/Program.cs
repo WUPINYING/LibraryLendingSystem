@@ -3,6 +3,7 @@ using LibraryLendingSystem_Service.Books.Repository;
 using LibraryLendingSystem_Service.Members.Interface;
 using LibraryLendingSystem_Service.Members.Repository;
 using LibraryLendingSystem_Service.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,12 @@ builder.Services.AddCors(options =>
 //Dapper
 builder.Services.AddScoped<IDapperRepo, DapperRepo>();
 builder.Services.AddScoped<IMemberDapperRepo, MemberDapperRepo>();
+
+//Cookie
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

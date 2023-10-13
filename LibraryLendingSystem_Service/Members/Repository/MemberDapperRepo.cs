@@ -26,5 +26,10 @@ VALUES (@phoneNumber,@password,'User11',GETDATE(),'2023-10-19 06:15:00');";
             dbConnection.Query<RegisterDto>(sql, new { phoneNumber = dto.PhoneNumber, password = dto.Password });
             return dto;
         }
+
+        public void Login(RegisterDto dto)
+        {
+            //to更新最後登入時間欄位
+        }
     }
 }
