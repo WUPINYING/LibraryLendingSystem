@@ -131,6 +131,7 @@ namespace LibraryLendingSystem_Service.Controllers
                 var userData = (from m in _db.Users
                                 where m.PhoneNumber == dto.PhoneNumber
                                 select m).SingleOrDefault();
+                int userId = userData.UserId;
 
                 var userPwdInDb = userData.Password;
 
@@ -156,7 +157,7 @@ namespace LibraryLendingSystem_Service.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                     service.Login(dto);
-                    return Ok("會員登入成功");
+                    return Ok(userId);
                 }
                 else
                 {

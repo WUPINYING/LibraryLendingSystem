@@ -67,6 +67,7 @@
                 contentType: "application/json", // 設定內容類型為 JSON
                 success: function (data) {
                     console.log("Success: ", data);
+                    localStorage.setItem('userId', data);
                     alert("登入成功囉!可以前往借書!!");
                     window.location.href = "https://localhost:7177/Home/Books";
                 },

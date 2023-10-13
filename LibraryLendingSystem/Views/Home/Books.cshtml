@@ -73,25 +73,48 @@
         function borrowBook(isbn) {
             alert("借閱 ISBN: " + isbn);
 
-            var userId = 1;
-            var inventoryId = 1;
+            var bookISBN = isbn;
+            var inventoryId = null;
+            var userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert("請先登入才能借書!");
+                return;
+            }
 
             $.ajax({
-                type: "POST",
-                url: `${baseAddress}/api/Books/BorrowBook`,
-                data: JSON.stringify({
-                    UserId: userId,
-                    InventoryId: inventoryId
-                }),
-                contentType: "application/json", // 設定內容類型
-                success: function (data) {
-                    displayBooks(data);
-                    alert("借閱成功!");
-                },
-                error: function (err) {
-                    alert("請先登入才能借書!");
-                }
+                type: "GET",
+                url: `${baseAddress}/api/Books/Isbn?isbn=${bookISBN}`
+            }).done(data => {
+                console.log(data);
+                var inventoryId = data;
+
+                $.ajax({
+                    type: "POST",
+                    url: `${baseAddress}/api/Books/BorrowBook`,
+                    data: JSON.stringify({
+                        UserId: userId,
+                        InventoryId: inventoryId
+                    }),
+                    contentType: "application/json", // 設定內容類型
+                    success: function (data) {
+                        var borrowButtonId = 'borrowButton_' + bookISBN;
+                        var borrowButton = $('#' + borrowButtonId);
+
+                        borrowButton.text('已出借');
+                        borrowButton.removeClass('btn-primary').addClass('btn-secondary');
+                        borrowButton.prop('disabled', true);
+
+                        alert("借閱成功!");
+                    },
+                    error: function (err) {
+                        alert(err.responseText);
+                    }
+                });
+
+            }).fail(err => {
+                alert(err.statusText);
             });
+
 
         }
     </script>

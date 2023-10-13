@@ -39,21 +39,28 @@ namespace LibraryLendingSystem_Service.Controllers
         }
 
         // GET: api/Books/5
-        [HttpGet("{id}")]
-        public async Task<Book> GetBook(string id)
+        [HttpGet("Isbn")]
+        public async Task<ActionResult<Book>> GetBook(string isbn)
         {
-            if (_db.Book == null)
-            {
-                return null;
-            }
-            var book = await _db.Book.FindAsync(id);
+            var book =  _db.Book.FirstOrDefault(b => b.Isbn == isbn);
 
-            if (book == null)
+            if (book != null)
             {
-                return null;
-            }
+                var inventory =  _db.Inventory.FirstOrDefault(i => i.Isbn == isbn);
 
-            return book;
+                if (inventory != null)
+                {
+                    return Ok(inventory.InventoryId);
+                }
+                else
+                {
+                    return NotFound("找不到對應的InventoryId");
+                }
+            }
+            else
+            {
+                return NotFound("找不到對應的書籍");
+            }
         }
 
         // PUT: api/Books/5
@@ -118,13 +125,24 @@ namespace LibraryLendingSystem_Service.Controllers
 
 
         [HttpPost("BorrowBook")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<BorrowBookDto>> BorrowBook(BorrowBookDto dto)
         {
-            var service = new BookService(_repo);
-            var result = service.BorrowBook(dto);
-            return Ok(result);
+            int inventoryId = dto.InventoryId;
+            bool borrowed = BookRecordExists(inventoryId);
 
+            //已出借
+            if (borrowed == true)
+            {
+                return BadRequest("此書已有人借閱");
+            }
+            else
+            {
+                //未出借
+                var service = new BookService(_repo);
+                var result = service.BorrowBook(dto);
+                return Ok(result.InventoryId);
+            }
         }
 
         // DELETE: api/Books/5
@@ -150,6 +168,13 @@ namespace LibraryLendingSystem_Service.Controllers
         private bool BookExists(string id)
         {
             return (_db.Book?.Any(e => e.Isbn == id)).GetValueOrDefault();
+        }
+
+        private bool BookRecordExists(int inventoryId)
+        {
+            var BookRecordInDb = _db.BorrowingRecord.FirstOrDefault(b => b.InventoryId == inventoryId);
+            if (BookRecordInDb == null) return false;
+            return true;
         }
     }
 }
