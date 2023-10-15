@@ -1,23 +1,33 @@
-﻿<div>
-    <h2>Book List</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>國際標準書號</th>
-                <th>書名</th>
-                <th>作者</th>
-                <th>描述</th>
-                <th>目前狀態</th>
-            </tr>
-        </thead>
-        <tbody id="bookList">
-            <!-- 書籍將在這裡顯示 -->
-        </tbody>
-    </table>
-</div>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+    <style>
+        .book-button {
+            width: 100px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>Book List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>國際標準書號</th>
+                    <th>書名</th>
+                    <th>作者</th>
+                    <th>描述</th>
+                    <th>目前狀態</th>
+                </tr>
+            </thead>
+            <tbody id="bookList">
+                <!-- 書籍將在這裡顯示 -->
+            </tbody>
+        </table>
+    </div>
 
-@section Scripts
-    {
     <script>
         var baseAddress = "https://localhost:7206";
 
@@ -50,7 +60,7 @@
                     borrowButtonText = '已出借';
                     borrowButtonClass = 'btn btn-secondary';
                     statusCell = '<span class="text-danger">' + book.statusName + '</span>';
-                    isBorrowButtonDisabled = true; // 禁用 "已出借" 按鈕
+                    isBorrowButtonDisabled = true;
                 } else if (book.statusName === '在庫') {
                     borrowButtonText = '借閱';
                     borrowButtonClass = 'btn btn-primary';
@@ -60,11 +70,11 @@
                     borrowButtonText = '無法借閱';
                     borrowButtonClass = 'btn btn-danger';
                     statusCell = book.statusName;
-                    isBorrowButtonDisabled = true; // 禁用 "無法借閱" 按鈕
+                    isBorrowButtonDisabled = true;
                 }
 
-                var borrowButtonId = 'borrowButton_' + book.isbn; // 每個按鈕的唯一ID
-                var borrowButton = '<button id="' + borrowButtonId + '" class="' + borrowButtonClass + '" onclick="' + borrowButtonAction + '" ' + (isBorrowButtonDisabled ? 'disabled' : '') + '>' + borrowButtonText + '</button>';
+                var borrowButtonId = 'borrowButton_' + book.isbn;
+                var borrowButton = '<button id="' + borrowButtonId + '" class="' + borrowButtonClass + ' book-button" onclick="' + borrowButtonAction + '" ' + (isBorrowButtonDisabled ? 'disabled' : '') + '>' + borrowButtonText + '</button>';
 
                 bookList.append("<tr><td>" + book.isbn + "</td><td>" + book.name + "</td><td>" + book.author + "</td><td>" + book.introduction + "</td><td>" + statusCell + "</td><td>" + borrowButton + "</td></tr>");
             });
@@ -95,7 +105,7 @@
                         UserId: userId,
                         InventoryId: inventoryId
                     }),
-                    contentType: "application/json", // 設定內容類型
+                    contentType: "application/json",
                     success: function (data) {
                         var borrowButtonId = 'borrowButton_' + bookISBN;
                         var borrowButton = $('#' + borrowButtonId);
@@ -116,4 +126,5 @@
             });
         }
     </script>
-}
+</body>
+</html>

@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [LibraryLendingSystem]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Database [LibraryLendingSystem]    Script Date: 2023/10/15 下午 02:08:26 ******/
 CREATE DATABASE [LibraryLendingSystem]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [LibraryLendingSystem] SET QUERY_STORE = OFF
 GO
 USE [LibraryLendingSystem]
 GO
-/****** Object:  Table [dbo].[Book]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Table [dbo].[Book]    Script Date: 2023/10/15 下午 02:08:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ CREATE TABLE [dbo].[Book](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BorrowingRecord]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Table [dbo].[BorrowingRecord]    Script Date: 2023/10/15 下午 02:08:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[BorrowingRecord](
 	[ReturnTime] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Inventory]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Table [dbo].[Inventory]    Script Date: 2023/10/15 下午 02:08:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,7 +126,7 @@ CREATE TABLE [dbo].[Inventory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LendStatus]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Table [dbo].[LendStatus]    Script Date: 2023/10/15 下午 02:08:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ CREATE TABLE [dbo].[LendStatus](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 2023/10/15 下午 02:08:26 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,53 +230,29 @@ SET IDENTITY_INSERT [dbo].[LendStatus] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Users] ON 
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (1, N'0951111111', N'password1', N'User1', CAST(N'2023-09-01T10:00:00.000' AS DateTime), CAST(N'2023-10-10T15:00:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (1, N'0951111111', N'53D453B0C08B6B38AE91515DC88D25FBECDD1D6001F022419629DF844F8BA433', N'User1', CAST(N'2023-09-01T10:00:00.000' AS DateTime), CAST(N'2023-10-10T15:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (2, N'0952222222', N'password2', N'User2', CAST(N'2023-09-02T11:00:00.000' AS DateTime), CAST(N'2023-10-11T14:30:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (2, N'0952222222', N'707F5D7020989CA8EDA06F6985FF472CA986BCF508010036433DC2B937C77C5D', N'User2', CAST(N'2023-09-02T11:00:00.000' AS DateTime), CAST(N'2023-10-11T14:30:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (3, N'0953333333', N'password3', N'User3', CAST(N'2023-09-03T12:00:00.000' AS DateTime), CAST(N'2023-10-12T13:45:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (3, N'0953333333', N'84C45E72EBFF7042E000B2BFD67B22367B18DDCB723CE4C32F9F1B2064999E08', N'User3', CAST(N'2023-09-03T12:00:00.000' AS DateTime), CAST(N'2023-10-12T13:45:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (4, N'0954444444', N'password4', N'User4', CAST(N'2023-09-04T13:00:00.000' AS DateTime), CAST(N'2023-10-13T12:15:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (4, N'0954444444', N'69EB37A629F7E8CEBC72D6B4E005BBEECBDFC6471A14B12C6CD079102B708823', N'User4', CAST(N'2023-09-04T13:00:00.000' AS DateTime), CAST(N'2023-10-13T12:15:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (5, N'0955555555', N'password5', N'User5', CAST(N'2023-09-05T14:00:00.000' AS DateTime), CAST(N'2023-10-14T11:30:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (5, N'0955555555', N'2F75CB140F1D0B8CC9BEA50AB9A32B9E6EA3CA31BABFAB23D6F5F814767EF11F', N'User5', CAST(N'2023-09-05T14:00:00.000' AS DateTime), CAST(N'2023-10-14T11:30:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (6, N'0956666666', N'password6', N'User6', CAST(N'2023-09-06T15:00:00.000' AS DateTime), CAST(N'2023-10-15T10:45:00.000' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (6, N'0956666666', N'9A2D05F0EA0DAB24814EFEC8BF9A5B377AD77330623112EAEB8981AB8D13ECB2', N'User6', CAST(N'2023-09-06T15:00:00.000' AS DateTime), CAST(N'2023-10-15T10:45:00.000' AS DateTime))
 GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (7, N'0957777777', N'password7', N'User7', CAST(N'2023-09-07T16:00:00.000' AS DateTime), CAST(N'2023-10-16T09:30:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (8, N'0958888888', N'password8', N'User8', CAST(N'2023-09-08T17:00:00.000' AS DateTime), CAST(N'2023-10-17T08:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (9, N'0959999999', N'password9', N'User9', CAST(N'2023-09-09T18:00:00.000' AS DateTime), CAST(N'2023-10-18T07:00:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (10, N'0950000000', N'password10', N'User10', CAST(N'2023-09-10T19:00:00.000' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (12, N'0950000001', N'password11', N'User11', CAST(N'2023-10-13T09:48:38.120' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (13, N'0950000002', N'53D453B0C08B6B38AE91515DC88D25FBECDD1D6001F022419629DF844F8BA433', N'User11', CAST(N'2023-10-13T10:06:29.177' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (14, N'0921762759', N'707F5D7020989CA8EDA06F6985FF472CA986BCF508010036433DC2B937C77C5D', N'User11', CAST(N'2023-10-13T11:20:32.523' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (17, N'0921777777', N'84C45E72EBFF7042E000B2BFD67B22367B18DDCB723CE4C32F9F1B2064999E08', N'User11', CAST(N'2023-10-13T11:49:47.570' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (18, N'0978778777', N'69EB37A629F7E8CEBC72D6B4E005BBEECBDFC6471A14B12C6CD079102B708823', N'User11', CAST(N'2023-10-13T11:51:43.473' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (20, N'0978456444', N'2F75CB140F1D0B8CC9BEA50AB9A32B9E6EA3CA31BABFAB23D6F5F814767EF11F', N'User11', CAST(N'2023-10-13T12:01:49.917' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (23, N'0912345678', N'9A2D05F0EA0DAB24814EFEC8BF9A5B377AD77330623112EAEB8981AB8D13ECB2', N'User11', CAST(N'2023-10-13T12:48:39.550' AS DateTime), CAST(N'2023-10-19T06:15:00.000' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (24, N'0922222222', N'7E0E8DCA444EF9B5C2EA087CF040B59B820FC4363A9B03795E0D793513B15E62', N'User11', CAST(N'2023-10-13T12:51:43.097' AS DateTime), CAST(N'2023-10-13T19:50:07.293' AS DateTime))
-GO
-INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (26, N'          ', N'E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855', N'User11', CAST(N'2023-10-13T15:28:11.603' AS DateTime), CAST(N'2023-10-13T15:38:40.497' AS DateTime))
+INSERT [dbo].[Users] ([UserId], [PhoneNumber], [Password], [UserName], [RegistrationTime], [LastLoginTime]) VALUES (7, N'0922222222', N'7E0E8DCA444EF9B5C2EA087CF040B59B820FC4363A9B03795E0D793513B15E62', N'User7', CAST(N'2023-09-07T16:00:00.000' AS DateTime), CAST(N'2023-10-16T09:30:00.000' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
-/****** Object:  Index [IX_BorrowingRecord_InventoryId]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Index [IX_BorrowingRecord_InventoryId]    Script Date: 2023/10/15 下午 02:08:26 ******/
 ALTER TABLE [dbo].[BorrowingRecord] ADD  CONSTRAINT [IX_BorrowingRecord_InventoryId] UNIQUE NONCLUSTERED 
 (
 	[InventoryId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_BorrowingRecord_UserId]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Index [IX_BorrowingRecord_UserId]    Script Date: 2023/10/15 下午 02:08:26 ******/
 CREATE NONCLUSTERED INDEX [IX_BorrowingRecord_UserId] ON [dbo].[BorrowingRecord]
 (
 	[UserId] ASC
@@ -284,7 +260,7 @@ CREATE NONCLUSTERED INDEX [IX_BorrowingRecord_UserId] ON [dbo].[BorrowingRecord]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_User_phone]    Script Date: 2023/10/13 下午 11:40:05 ******/
+/****** Object:  Index [IX_User_phone]    Script Date: 2023/10/15 下午 02:08:26 ******/
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [IX_User_phone] UNIQUE NONCLUSTERED 
 (
 	[PhoneNumber] ASC
